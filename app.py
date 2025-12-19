@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import os
 
-# 1. AYARLAR
+# 1. SAYFA AYARLARI
 st.set_page_config(page_title="Prof. Dr. Bülent DÖŞ", layout="centered")
 
 # 2. ÜST GÖRSEL
@@ -32,36 +32,45 @@ c3.link_button("📸 Instagram", "https://www.instagram.com/bulenttdos/")
 st.markdown("---")
 st.subheader("📚 Akademik Yayınlar (2024-2025)")
 
-# DOSYA KONTROLÜ VE OKUMA
 file_path = "citations.csv"
 
-if not os.path.exists(file_path):
-    st.error(f"❌ '{file_path}' dosyası bulunamadı. Lütfen GitHub'a bu isimle yüklediğinizden emin olun.")
-    st.info("İpucu: Dosya adının tamamen küçük harf olduğundan ve sonunda .csv uzantısı olduğundan emin olun.")
-else:
+if os.path.exists(file_path):
     try:
-        # CSV'yi oku (Ayraç virgül değilse sep=';' eklemek gerekebilir)
+        # CSV dosyasını oku
         df = pd.read_csv(file_path)
         
-        # Yıl sütununu sayıya çevir (hata vermemesi için)
-        df['Year'] = pd.to_numeric(df['Year'], errors='coerce')
+        # Sütun isimlerindeki boşlukları ve hataları temizle
+        df.columns = df.columns.str.strip()
         
-        # Sadece 2024 ve 2025 yıllarını filtrele
-        df_filtered = df[df['Year'].isin([2024, 2025])].sort_values(by='Year', ascending=False)
+        # Sütun isimlerini tahmin etmeye çalış (Title, Author, Year içerenleri bul)
+        # Eğer bulamazsa 1., 2. ve 3. sütunları kullan
+        title_col = next((c for c in df.columns if 'Title' in c or 'title' in c), df.columns[0])
+        author_col = next((c for c in df.columns if 'Author' in c or 'author' in c), df.columns[1])
+        year_col = next((c for c in df.columns if 'Year' in c or 'year' in c), df.columns[2])
+        journal_col = next((c for c in df.columns if 'Journal' in c or 'Publication' in c), df.columns[3] if len(df.columns)>3 else df.columns[0])
+
+        # Yıl sütununu sayıya çevir
+        df[year_col] = pd.to_numeric(df[year_col], errors='coerce')
+        
+        # 2024 ve 2025 filtrele
+        df_filtered = df[df[year_col].isin([2024, 2025])].sort_values(by=year_col, ascending=False)
         
         if not df_filtered.empty:
-            for index, row in df_filtered.iterrows():
-                title = row['Title'] if pd.notna(row['Title']) else "Başlıksız Yayın"
-                author = row['Author'] if pd.notna(row['Author']) else "Yazar Belirtilmemiş"
-                year = int(row['Year'])
-                journal = row['Journal'] if pd.notna(row['Journal']) else ""
+            for _, row in df_filtered.iterrows():
+                t = row[title_col]
+                a = row[author_col]
+                y = int(row[year_col])
+                j = row[journal_col] if journal_col in row else ""
                 
-                st.success(f"**{title}** \n*{author}* ({year}). {journal}")
+                st.success(f"**{t}** \n\n*{a}* ({y}) \n\n{j}")
         else:
             st.warning("Dosyada 2024 veya 2025 yılına ait yayın bulunamadı.")
             
     except Exception as e:
-        st.error(f"⚠️ Dosya okuma hatası: {e}")
+        st.error(f"⚠️ Veri işleme hatası: {e}")
+        st.info("Lütfen CSV dosyanızın içeriğini kontrol edin.")
+else:
+    st.error("Dosya bulunamadı.")
 
 st.markdown("---")
 st.caption("© 2025 | Prof. Dr. Bülent DÖŞ")
