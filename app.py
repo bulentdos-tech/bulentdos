@@ -10,6 +10,7 @@ st.markdown("""<style>
 .pub-card {background-color: #f9f9f9; padding: 15px; border-radius: 10px; border-left: 5px solid #D32F2F; margin-bottom: 10px; border: 1px solid #eee;}
 .pub-title {color: #D32F2F; font-weight: bold; font-size: 1.1rem; margin-bottom: 5px;}
 .pub-info {color: #555; font-size: 0.95rem;}
+.bio-text {line-height: 1.6; text-align: justify; color: #333;}
 </style>""", unsafe_allow_html=True)
 
 # 3. ÜST GÖRSEL
@@ -25,8 +26,18 @@ with col1:
 
 with col2:
     st.header("Prof. Dr. Bülent DÖŞ")
-    st.write("Gaziantep Üniversitesi Eğitim Fakültesi Öğretim Üyesi.")
-    st.write("Eğitim bilimleri alanında uluslararası çalışmalarıyla tanınan Prof. Dr. Bülent DÖŞ'ün akademik portfolyosuna aşağıdan ulaşabilirsiniz.")
+    
+    # GÜNCEL ÖZGEÇMİŞ METNİ (KIRILMAZ YAPI)
+    bio = "Prof. Dr. Bülent Döş, Gaziantep Üniversitesi Eğitim Fakültesi’nde görev yapan deneyimli bir akademisyendir; "
+    bio += "öğretim programı geliştirme, öğretmen eğitimi, yükseköğretim ve eğitim teknolojileri gibi alanlarda odaklanan çalışmalarıyla tanınır. "
+    bio += "Google Scholar verilerine göre toplamda yaklaşık 970 atıf almış; bu atıflar onun çalışmalarının eğitim bilimleri literatüründe geniş bir etki yarattığını göstermektedir. "
+    bio += "Ayrıca profilinde yer alan yayınlar arasındaki etki ve üretkenlik ölçütlerine göre bilimsel üretimi düzenli şekilde atıf bulmaktadır; "
+    bio += "bu göstergeler, akademik çabalarının ulusal ve uluslararası alanda fark edildiğini ortaya koymaktadır. "
+    bio += "Prof. Dr. Döş, lisans ve lisansüstü düzeyde dersler vermekte, çok sayıda yüksek lisans ve doktora tezine başarıyla danışmanlık yapmakta "
+    bio += "ve eğitim bilimleri alanında hakemli dergilerde yayımlanmış makale, kitap bölümü ve bildiri gibi çok çeşitli akademik ürünler üretmektedir. "
+    bio += "Akademik projeler, bilimsel topluluklarda yürüttüğü görevler ve hakemlik çalışmalarıyla bilimsel topluluğa katkılarını sürdürmektedir."
+    
+    st.markdown(f'<div class="bio-text">{bio}</div>', unsafe_allow_html=True)
 
 # 5. SOSYAL MEDYA
 st.markdown("---")
@@ -41,41 +52,4 @@ st.subheader("📚 Tüm Akademik Yayınlar")
 
 file_path = "citations.csv"
 
-if os.path.exists(file_path):
-    try:
-        # CSV dosyasını oku
-        df = pd.read_csv(file_path)
-        df.columns = df.columns.str.strip() # Sütun isimlerindeki boşlukları temizle
-        
-        # Dinamik sütun eşleştirme
-        title_col = next((c for c in df.columns if 'Title' in c or 'title' in c), df.columns[0])
-        author_col = next((c for c in df.columns if 'Author' in c or 'author' in c), df.columns[1])
-        year_col = next((c for c in df.columns if 'Year' in c or 'year' in c), df.columns[2])
-        journal_col = next((c for c in df.columns if 'Journal' in c or 'Publication' in c or 'Publisher' in c), None)
-
-        # Yılı sayıya çevir ve sırala
-        df[year_col] = pd.to_numeric(df[year_col], errors='coerce')
-        df = df.sort_values(by=year_col, ascending=False)
-        
-        # Her yayını kart olarak bas
-        for _, row in df.iterrows():
-            t = row[title_col]
-            a = row[author_col]
-            y = int(row[year_col]) if pd.notna(row[year_col]) else "Belirtilmemiş"
-            j = row[journal_col] if journal_col and pd.notna(row[journal_col]) else ""
-            
-            st.markdown(f"""
-            <div class="pub-card">
-                <div class="pub-title">📄 {t}</div>
-                <div class="pub-info"><b>Yazar(lar):</b> {a}</div>
-                <div class="pub-info"><b>Yıl:</b> {y} | <b>Yayın:</b> {j}</div>
-            </div>
-            """, unsafe_allow_html=True)
-            
-    except Exception as e:
-        st.error(f"⚠️ Liste oluşturulurken bir hata oluştu: {e}")
-else:
-    st.error("❌ 'citations.csv' dosyası bulunamadı.")
-
-st.markdown("---")
-st.caption("© 2025 | Prof. Dr. Bülent DÖŞ")
+if os.path.
