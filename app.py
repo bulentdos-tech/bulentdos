@@ -26,7 +26,7 @@ with col1:
 with col2:
     st.header("Prof. Dr. Bülent DÖŞ")
     st.write("Gaziantep Üniversitesi Eğitim Fakültesi Öğretim Üyesi.")
-    st.write("Prof. Dr. **Bülent Döş**, Gaziantep Üniversitesi Eğitim Fakültesi’nde profesör olarak görev yapan ve
+    st.write("Prof. Dr. Bülent Döş, Gaziantep Üniversitesi Eğitim Fakültesi’nde profesör olarak görev yapan ve
 öğretim programları geliştirme, öğretmen eğitimi, yükseköğretimde kalite güvencesi ve eğitim
 teknolojileri alanlarında uzmanlaşmış bir akademisyendir. Google Scholar verilerine göre çalışmaları
 yaklaşık 970 atıf almış olup, bu durum bilimsel üretimlerinin eğitim bilimleri literatüründe güçlü
