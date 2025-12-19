@@ -1,72 +1,69 @@
 import streamlit as st
 
-# 1. SAYFA YAPILANDIRMASI
-st.set_page_config(page_title="Prof. Dr. Bülent DÖŞ | GAÜN", layout="centered")
+# 1. AYARLAR
+st.set_page_config(page_title="Prof. Dr. Bülent DÖŞ", layout="centered")
 
-# 2. ÖZEL TASARIM (GAÜN KIRMIZISI VE MODERN KARTLAR)
+# 2. STİL AYARLARI
 st.markdown("""
     <style>
-    .main { background-color: #ffffff; }
-    .header-style { color: #D32F2F; text-align: center; font-weight: bold; }
     .pub-card { 
-        background-color: #f8f9fa; 
-        padding: 15px; 
-        border-radius: 10px; 
-        border-left: 6px solid #D32F2F; 
-        margin-bottom: 15px;
-        box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+        background-color: #f9f9f9; padding: 15px; border-radius: 10px; 
+        border-left: 6px solid #D32F2F; margin-bottom: 10px; border: 1px solid #eee;
     }
-    .pub-link { color: #D32F2F !important; text-decoration: none; font-weight: bold; font-size: 1.1rem; }
-    .pub-link:hover { text-decoration: underline; }
+    .pub-link { color: #D32F2F !important; text-decoration: none; font-weight: bold; }
     </style>
     """, unsafe_allow_html=True)
 
-# 3. EN ÜST - GAÜN KAMPÜS RESMİ
-st.image("https://www.gantep.edu.tr/manset/manset_resim/47941_GAUN_3.jpg", use_container_width=True, caption="Gaziantep Üniversitesi")
+# 3. ÜST GAÜN RESMİ
+st.image("https://www.gantep.edu.tr/manset/manset_resim/47941_GAUN_3.jpg")
 
-# 4. PROFİL BÖLÜMÜ
-col1, col2 = st.columns([1, 2])
-
-with col1:
-    # Fotoğrafınızı GitHub'a 'profil.jpg' adıyla yüklerseniz burada görünür
+# 4. PROFİL
+c1, c2 = st.columns([1, 2])
+with c1:
     try:
-        st.image("profil.jpg", width=220)
+        st.image("profil.jpg", width=200)
     except:
-        st.image("https://via.placeholder.com/220x250.png?text=Profil+Foto", width=220)
+        st.image("https://via.placeholder.com/200x250.png?text=Bulent+Dos", width=200)
     
-    st.markdown("### 📱 Sosyal Medya")
+    st.write("### 📱 Sosyal Medya")
     st.markdown("[🔵 LinkedIn](https://www.linkedin.com/in/b%C3%BClent-d%C3%B6%C5%9F-2018a017/)")
     st.markdown("[🔴 Google Scholar](https://scholar.google.com/citations?user=xpLZ0O8AAAAJ)")
     
-    # INSTAGRAM KAREKOD ALANI
-    st.markdown("---")
     st.write("📸 **Instagram QR**")
     try:
-        # GitHub'a 'instagram_qr.png' adıyla karekodunuzu yüklerseniz burada görünür
         st.image("instagram_qr.png", width=150)
     except:
-        st.info("Karekod için 'instagram_qr.png' dosyasını GitHub'a yükleyin.")
+        st.caption("QR için instagram_qr.png yükleyin")
 
-with col2:
-    st.markdown("<h1 class='header-style'>Prof. Dr. Bülent DÖŞ</h1>", unsafe_allow_html=True)
-    st.subheader("Gaziantep Üniversitesi | Eğitim Fakültesi")
-    st.write("""
-    Eğitim Bilimleri alanında uzmanlaşmış, harmanlanmış öğrenme, üstbilişsel farkındalık ve 
-    eğitim teknolojileri üzerine uluslararası çalışmalar yürüten öğretim üyesiyim.
-    """)
-    st.info("✉️ İletişim: bulentdos@yahoo.com")
-    
-    st.markdown("### 🎯 Uzmanlık Alanları")
-    st.success("✅ Eğitim Programları ve Öğretim")
-    st.success("✅ Dijital Okuryazarlık ve AI")
-    st.success("✅ Ölçme ve Değerlendirme")
+with c2:
+    st.title("Prof. Dr. Bülent DÖŞ")
+    st.subheader("Gaziantep Üniversitesi")
+    st.write("Eğitim Bilimleri Fakültesi Öğretim Üyesi. Uzmanlık: Üstbiliş, Harmanlanmış Öğrenme, Eğitim Teknolojileri.")
+    st.info("✉️ bulentdos@yahoo.com")
 
-# 5. MAKALELER (DOĞRUDAN ÇALIŞAN LİNKLER)
+# 5. MAKALELER (HATA VERMEYEN GÜVENLİ YAPI)
 st.markdown("---")
-st.markdown("<h2 style='color:#333;'>📚 Seçilmiş Yayınlar</h2>", unsafe_allow_html=True)
+st.header("📚 Seçilmiş Yayınlar")
 
-# Linkleri doğrudan yayıncı sitelerinden (DergiPark vb.) verdim
-yayinlar = [
-    {
-        "ad": "İlköğretim Öğrencilerinin Üstbilişsel Farkındalık Düzeyleri",
-        "url": "https://dergipark.
+# Verileri güvenli bir şekilde tanımlıyoruz
+titles = [
+    "İlköğretim Öğrencilerinin Üstbilişsel Farkındalık Düzeyleri",
+    "An Analysis of Teachers' Questioning Strategies",
+    "The Analysis of Blogs in Blended Courses"
+]
+links = [
+    "https://dergipark.org.tr/tr/pub/mkusbe/issue/15396/161835",
+    "https://academicjournals.org/journal/ERR/article-full-text-pdf/5F8B84161601",
+    "https://pau.edu.tr/egetimdergi/tr/makale/the-analysis-of-the-blogs-created-in-a-blended-course-through-the-reflective-thinking-perspective-6"
+]
+
+# Döngü ile ekrana basıyoruz
+for t, l in zip(titles, links):
+    st.markdown(f"""
+    <div class='pub-card'>
+        <a href='{l}' target='_blank' class='pub-link'>📄 {t}</a>
+    </div>
+    """, unsafe_allow_html=True)
+
+# 6. ALT BİLGİ
+st.markdown("<br><p style='text-align:center; color:gray;'>© 2025 | Prof. Dr. Bülent DÖŞ</p>", unsafe_allow_html=True)
