@@ -3,79 +3,62 @@ import pandas as pd
 import os
 
 # 1. SAYFA AYARLARI
-st.set_page_config(page_title="Prof. Dr. Bülent DÖŞ", layout="centered")
+st.set_page_config(page_title="Prof. Dr. Bülent DÖŞ", layout="wide")
 
-# 2. ÖZEL STİL (Yayın kartları için)
+# 2. ÖZEL STİL
 st.markdown("""<style>
-.pub-card {background-color: #f9f9f9; padding: 15px; border-radius: 10px; border-left: 5px solid #D32F2F; margin-bottom: 10px; border: 1px solid #eee;}
-.pub-title {color: #D32F2F; font-weight: bold; font-size: 1.1rem; margin-bottom: 5px;}
-.pub-info {color: #555; font-size: 0.95rem;}
+.bio-box { background-color: #fdfdfd; padding: 20px; border-radius: 15px; border: 1px solid #eee; line-height: 1.7; font-size: 1.05rem; color: #333; text-align: justify; }
+.pub-card { background-color: #ffffff; padding: 15px; border-radius: 10px; border-left: 5px solid #D32F2F; margin-bottom: 10px; border: 1px solid #eee; box-shadow: 1px 1px 3px rgba(0,0,0,0.05); }
+.pub-title { color: #D32F2F; font-weight: bold; font-size: 1.1rem; }
+.contact-section { background-color: #f1f1f1; padding: 15px; border-radius: 10px; text-align: center; margin-top: 10px; }
 </style>""", unsafe_allow_html=True)
 
-# 3. ÜST GÖRSEL
-st.image("https://www.gantep.edu.tr/manset/manset_resim/47941_GAUN_3.jpg")
+# 3. ÜST GAÜN GÖRSELİ
+st.image("https://www.gantep.edu.tr/manset/manset_resim/47941_GAUN_3.jpg", use_container_width=True)
 
-# 4. PROFİL VE ÖZGEÇMİŞ
-col1, col2 = st.columns([1, 2])
+# 4. ÜST PANEL: FOTO VE ÖZGEÇMİŞ
+col1, col2 = st.columns([1, 2.5])
+
 with col1:
     try:
-        st.image("profil.jpg", width=200)
+        st.image("profil.jpg", width=250)
     except:
-        st.image("https://via.placeholder.com/200x250.png?text=Bulent+Dos", width=200)
+        st.image("https://via.placeholder.com/250x300.png?text=Prof.+Dr.+Bulent+Dos", width=250)
+    
+    st.markdown("<div class='contact-section'>", unsafe_allow_html=True)
+    st.link_button("🔴 Google Scholar", "https://scholar.google.com/citations?user=xpLZ0O8AAAAJ", use_container_width=True)
+    st.link_button("🔵 LinkedIn", "https://www.linkedin.com/in/b%C3%BClent-d%C3%B6%C5%9F-2018a017/", use_container_width=True)
+    st.link_button("📸 Instagram", "https://www.instagram.com/bulenttdos/", use_container_width=True)
+    st.write("📧 bulentdos@yahoo.com")
+    st.markdown("</div>", unsafe_allow_html=True)
 
 with col2:
-    st.header("Prof. Dr. Bülent DÖŞ")
-    st.write("Gaziantep Üniversitesi Eğitim Fakültesi Öğretim Üyesi.")
-    st.write("Eğitim bilimleri alanında uluslararası çalışmalarıyla tanınan Prof. Dr. Bülent DÖŞ'ün akademik portfolyosuna aşağıdan ulaşabilirsiniz.")
+    st.markdown("<h1 style='color:#D32F2F;'>Prof. Dr. Bülent DÖŞ</h1>", unsafe_allow_html=True)
+    st.markdown("### Gaziantep Üniversitesi | Eğitim Bilimleri Fakültesi")
+    
+    # TAM ÖZGEÇMİŞ METNİ
+    st.markdown(f"""<div class='bio-box'>
+    Prof. Dr. Bülent Döş, Gaziantep Üniversitesi Eğitim Fakültesi’nde görev yapan deneyimli bir akademisyendir; 
+    öğretim programı geliştirme, öğretmen eğitimi, yükseköğretim ve eğitim teknolojileri gibi alanlarda odaklanan 
+    çalışmalarıyla tanınır. Google Scholar verilerine göre toplamda yaklaşık 970 atıf almış; bu atıflar onun 
+    çalışmalarının eğitim bilimleri literatüründe geniş bir etki yarattığını göstermektedir. <br><br>
+    Ayrıca profilinde yer alan yayınlar arasındaki etki ve üretkenlik ölçütlerine göre bilimsel üretimi düzenli 
+    şekilde atıf bulmaktadır; bu göstergeler, akademik çabalarının ulusal ve uluslararası alanda fark edildiğini 
+    ortaya koymaktadır. Prof. Dr. Döş, lisans ve lisansüstü düzeyde dersler vermekte, çok sayıda yüksek lisans 
+    ve doktora tezine başarıyla danışmanlık yapmakta ve eğitim bilimleri alanında hakemli dergilerde yayımlanmış 
+    makale, kitap bölümü ve bildiri gibi çok çeşitli akademik ürünler üretmektedir. Akademik projeler, bilimsel 
+    topluluklarda yürüttüğü görevler ve hakemlik çalışmalarıyla bilimsel topluluğa katkılarını sürdürmektedir.
+    </div>""", unsafe_allow_html=True)
 
-# 5. SOSYAL MEDYA
+# 5. AKADEMİK METRİKLER
 st.markdown("---")
-c1, c2, c3 = st.columns(3)
-c1.link_button("🔴 Google Scholar", "https://scholar.google.com/citations?user=xpLZ0O8AAAAJ")
-c2.link_button("🔵 LinkedIn", "https://www.linkedin.com/in/b%C3%BClent-d%C3%B6%C5%9F-2018a017/")
-c3.link_button("📸 Instagram", "https://www.instagram.com/bulenttdos/")
+m1, m2, m3 = st.columns(3)
+m1.metric("Toplam Atıf", "970+")
+m2.metric("h-endeksi", "16")
+m3.metric("i10-endeksi", "23")
 
-# 6. TÜM YAYINLAR BÖLÜMÜ
+# 6. TÜM YAYINLAR (CSV'DEN)
 st.markdown("---")
 st.subheader("📚 Tüm Akademik Yayınlar")
 
 file_path = "citations.csv"
-
-if os.path.exists(file_path):
-    try:
-        # CSV dosyasını oku
-        df = pd.read_csv(file_path)
-        df.columns = df.columns.str.strip() # Sütun isimlerindeki boşlukları temizle
-        
-        # Dinamik sütun eşleştirme
-        title_col = next((c for c in df.columns if 'Title' in c or 'title' in c), df.columns[0])
-        author_col = next((c for c in df.columns if 'Author' in c or 'author' in c), df.columns[1])
-        year_col = next((c for c in df.columns if 'Year' in c or 'year' in c), df.columns[2])
-        journal_col = next((c for c in df.columns if 'Journal' in c or 'Publication' in c or 'Publisher' in c), None)
-
-        # Yılı sayıya çevir ve sırala
-        df[year_col] = pd.to_numeric(df[year_col], errors='coerce')
-        df = df.sort_values(by=year_col, ascending=False)
-        
-        # Her yayını kart olarak bas
-        for _, row in df.iterrows():
-            t = row[title_col]
-            a = row[author_col]
-            y = int(row[year_col]) if pd.notna(row[year_col]) else "Belirtilmemiş"
-            j = row[journal_col] if journal_col and pd.notna(row[journal_col]) else ""
-            
-            st.markdown(f"""
-            <div class="pub-card">
-                <div class="pub-title">📄 {t}</div>
-                <div class="pub-info"><b>Yazar(lar):</b> {a}</div>
-                <div class="pub-info"><b>Yıl:</b> {y} | <b>Yayın:</b> {j}</div>
-            </div>
-            """, unsafe_allow_html=True)
-            
-    except Exception as e:
-        st.error(f"⚠️ Liste oluşturulurken bir hata oluştu: {e}")
-else:
-    st.error("❌ 'citations.csv' dosyası bulunamadı.")
-
-st.markdown("---")
-st.caption("© 2025 | Prof. Dr. Bülent DÖŞ")
