@@ -5,11 +5,10 @@ import os
 # 1. SAYFA AYARLARI
 st.set_page_config(page_title="Prof. Dr. Bülent DÖŞ", layout="centered")
 
-# 2. ÖZEL STİL (Yayın kartları için)
+# 2. ÖZEL STİL
 st.markdown("""<style>
 .pub-card {background-color: #f9f9f9; padding: 15px; border-radius: 10px; border-left: 5px solid #D32F2F; margin-bottom: 10px; border: 1px solid #eee;}
 .pub-title {color: #D32F2F; font-weight: bold; font-size: 1.1rem; margin-bottom: 5px;}
-.pub-info {color: #555; font-size: 0.95rem;}
 .bio-text {line-height: 1.6; text-align: justify; color: #333;}
 </style>""", unsafe_allow_html=True)
 
@@ -19,25 +18,13 @@ st.image("https://www.gantep.edu.tr/manset/manset_resim/47941_GAUN_3.jpg")
 # 4. PROFİL VE ÖZGEÇMİŞ
 col1, col2 = st.columns([1, 2])
 with col1:
-    try:
-        st.image("profil.jpg", width=200)
-    except:
-        st.image("https://via.placeholder.com/200x250.png?text=Bulent+Dos", width=200)
+    st.image("https://via.placeholder.com/200x250.png?text=Bulent+Dos")
 
 with col2:
     st.header("Prof. Dr. Bülent DÖŞ")
-    
-    # GÜNCEL ÖZGEÇMİŞ METNİ (KIRILMAZ YAPI)
-    bio = "Prof. Dr. Bülent Döş, Gaziantep Üniversitesi Eğitim Fakültesi’nde görev yapan deneyimli bir akademisyendir; "
-    bio += "öğretim programı geliştirme, öğretmen eğitimi, yükseköğretim ve eğitim teknolojileri gibi alanlarda odaklanan çalışmalarıyla tanınır. "
-    bio += "Google Scholar verilerine göre toplamda yaklaşık 970 atıf almış; bu atıflar onun çalışmalarının eğitim bilimleri literatüründe geniş bir etki yarattığını göstermektedir. "
-    bio += "Ayrıca profilinde yer alan yayınlar arasındaki etki ve üretkenlik ölçütlerine göre bilimsel üretimi düzenli şekilde atıf bulmaktadır; "
-    bio += "bu göstergeler, akademik çabalarının ulusal ve uluslararası alanda fark edildiğini ortaya koymaktadır. "
-    bio += "Prof. Dr. Döş, lisans ve lisansüstü düzeyde dersler vermekte, çok sayıda yüksek lisans ve doktora tezine başarıyla danışmanlık yapmakta "
-    bio += "ve eğitim bilimleri alanında hakemli dergilerde yayımlanmış makale, kitap bölümü ve bildiri gibi çok çeşitli akademik ürünler üretmektedir. "
-    bio += "Akademik projeler, bilimsel topluluklarda yürüttüğü görevler ve hakemlik çalışmalarıyla bilimsel topluluğa katkılarını sürdürmektedir."
-    
-    st.markdown(f'<div class="bio-text">{bio}</div>', unsafe_allow_html=True)
+    # ÖZGEÇMİŞ METNİ
+    b = "Prof. Dr. Bülent Döş, Gaziantep Üniversitesi Eğitim Fakültesi’nde görev yapan deneyimli bir akademisyendir; öğretim programı geliştirme, öğretmen eğitimi, yükseköğretim ve eğitim teknolojileri gibi alanlarda odaklanan çalışmalarıyla tanınır. Google Scholar verilerine göre toplamda yaklaşık 970 atıf almış; bu atıflar onun çalışmalarının eğitim bilimleri literatüründe geniş bir etki yarattığını göstermektedir. Ayrıca profilinde yer alan yayınlar arasındaki etki ve üretkenlik ölçütlerine göre bilimsel üretimi düzenli şekilde atıf bulmaktadır; bu göstergeler, akademik çabalarının ulusal ve uluslararası alanda fark edildiğini ortaya koymaktadır. Prof. Dr. Döş, lisans ve lisansüstü düzeyde dersler vermekte, çok sayıda yüksek lisans ve doktora tezine başarıyla danışmanlık yapmakta ve eğitim bilimleri alanında hakemli dergilerde yayımlanmış makale, kitap bölümü ve bildiri gibi çok çeşitli akademik ürünler üretmektedir. Akademik projeler, bilimsel topluluklarda yürüttüğü görevler ve hakemlik çalışmalarıyla bilimsel topluluğa katkılarını sürdürmektedir."
+    st.markdown(f'<div class="bio-text">{b}</div>', unsafe_allow_html=True)
 
 # 5. SOSYAL MEDYA
 st.markdown("---")
@@ -46,10 +33,14 @@ c1.link_button("🔴 Google Scholar", "https://scholar.google.com/citations?user
 c2.link_button("🔵 LinkedIn", "https://www.linkedin.com/in/b%C3%BClent-d%C3%B6%C5%9F-2018a017/")
 c3.link_button("📸 Instagram", "https://www.instagram.com/bulenttdos/")
 
-# 6. TÜM YAYINLAR BÖLÜMÜ
+# 6. YAYINLAR
 st.markdown("---")
 st.subheader("📚 Tüm Akademik Yayınlar")
 
-file_path = "citations.csv"
-
-if os.path.
+path = "citations.csv"
+if os.path.exists(path):
+    try:
+        df = pd.read_csv(path)
+        df.columns = df.columns.str.strip()
+        t_col = df.columns[0]
+        y_col = df
