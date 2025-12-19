@@ -26,8 +26,7 @@ with col1:
 with col2:
     st.header("Prof. Dr. Bülent DÖŞ")
     st.write("Gaziantep Üniversitesi Eğitim Fakültesi Öğretim Üyesi.")
-    st.write("bio_text = "
-Prof. Dr. **Bülent Döş**, Gaziantep Üniversitesi Eğitim Fakültesi’nde profesör olarak görev yapan ve
+    st.write("Prof. Dr. **Bülent Döş**, Gaziantep Üniversitesi Eğitim Fakültesi’nde profesör olarak görev yapan ve
 öğretim programları geliştirme, öğretmen eğitimi, yükseköğretimde kalite güvencesi ve eğitim
 teknolojileri alanlarında uzmanlaşmış bir akademisyendir. Google Scholar verilerine göre çalışmaları
 yaklaşık 970 atıf almış olup, bu durum bilimsel üretimlerinin eğitim bilimleri literatüründe güçlü
@@ -36,8 +35,7 @@ makalesi, kitap bölümü ve bilimsel bildiri ile alana katkı sunan Döş, lisa
 dersler vermekte; yüksek lisans ve doktora tezlerine danışmanlık yaparak akademik insan kaynağının
 yetiştirilmesine katkıda bulunmaktadır. Ayrıca çeşitli bilimsel projelerde yürütücü ve araştırmacı
 olarak görev almakta, akademik dergilerde hakemlik ve bilimsel kurul üyelikleri aracılığıyla
-akademik topluluğa hizmet etmeyi sürdürmektedir.
-")
+akademik topluluğa hizmet etmeyi sürdürmektedir.")
 
 # 5. SOSYAL MEDYA
 st.markdown("---")
