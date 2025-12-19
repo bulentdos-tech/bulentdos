@@ -1,80 +1,72 @@
 import streamlit as st
 
-# 1. AYARLAR
-st.set_page_config(page_title="Prof. Dr. Bülent DÖŞ", layout="centered")
+# 1. SAYFA YAPILANDIRMASI
+st.set_page_config(page_title="Prof. Dr. Bülent DÖŞ | GAÜN", layout="centered")
 
-# 2. ÖZEL STİL
+# 2. ÖZEL TASARIM (GAÜN KIRMIZISI VE MODERN KARTLAR)
 st.markdown("""
     <style>
-    .section-title { border-bottom: 2px solid #D32F2F; color: #333; font-weight: bold; margin-top: 20px; }
+    .main { background-color: #ffffff; }
+    .header-style { color: #D32F2F; text-align: center; font-weight: bold; }
     .pub-card { 
-        background-color: #ffffff; 
+        background-color: #f8f9fa; 
         padding: 15px; 
         border-radius: 10px; 
-        border: 1px solid #e0e0e0;
         border-left: 6px solid #D32F2F; 
-        margin-bottom: 12px;
+        margin-bottom: 15px;
+        box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
     }
-    .pub-link { color: #D32F2F; text-decoration: none; font-size: 1.1rem; font-weight: bold; }
-    .pub-link:hover { text-decoration: underline; color: #b71c1c; }
+    .pub-link { color: #D32F2F !important; text-decoration: none; font-weight: bold; font-size: 1.1rem; }
+    .pub-link:hover { text-decoration: underline; }
     </style>
     """, unsafe_allow_html=True)
 
-# 3. ÜST GÖRSEL
-st.image("https://www.gantep.edu.tr/manset/manset_resim/47941_GAUN_3.jpg")
+# 3. EN ÜST - GAÜN KAMPÜS RESMİ
+st.image("https://www.gantep.edu.tr/manset/manset_resim/47941_GAUN_3.jpg", use_container_width=True, caption="Gaziantep Üniversitesi")
 
-# 4. PROFİL
-c1, c2 = st.columns([1, 2])
-with c1:
+# 4. PROFİL BÖLÜMÜ
+col1, col2 = st.columns([1, 2])
+
+with col1:
+    # Fotoğrafınızı GitHub'a 'profil.jpg' adıyla yüklerseniz burada görünür
     try:
-        st.image("profil.jpg", width=210)
+        st.image("profil.jpg", width=220)
     except:
-        st.image("https://via.placeholder.com/210x260.png?text=Profil+Foto", width=210)
+        st.image("https://via.placeholder.com/220x250.png?text=Profil+Foto", width=220)
     
-    st.markdown("### 🔗 Bağlantılar")
-    st.markdown("[🔵 LinkedIn Profili](https://www.linkedin.com/in/b%C3%BClent-d%C3%B6%C5%9F-2018a017/)")
+    st.markdown("### 📱 Sosyal Medya")
+    st.markdown("[🔵 LinkedIn](https://www.linkedin.com/in/b%C3%BClent-d%C3%B6%C5%9F-2018a017/)")
     st.markdown("[🔴 Google Scholar](https://scholar.google.com/citations?user=xpLZ0O8AAAAJ)")
+    
+    # INSTAGRAM KAREKOD ALANI
+    st.markdown("---")
+    st.write("📸 **Instagram QR**")
+    try:
+        # GitHub'a 'instagram_qr.png' adıyla karekodunuzu yüklerseniz burada görünür
+        st.image("instagram_qr.png", width=150)
+    except:
+        st.info("Karekod için 'instagram_qr.png' dosyasını GitHub'a yükleyin.")
 
-with c2:
-    st.header("Prof. Dr. Bülent DÖŞ")
-    st.subheader("Gaziantep Üniversitesi")
-    st.write("Eğitim Bilimleri Fakültesi Öğretim Üyesi. Uzmanlık: Üstbiliş, Harmanlanmış Öğrenme, Eğitim Teknolojileri.")
-    st.info("✉️ bulentdos@yahoo.com")
+with col2:
+    st.markdown("<h1 class='header-style'>Prof. Dr. Bülent DÖŞ</h1>", unsafe_allow_html=True)
+    st.subheader("Gaziantep Üniversitesi | Eğitim Fakültesi")
+    st.write("""
+    Eğitim Bilimleri alanında uzmanlaşmış, harmanlanmış öğrenme, üstbilişsel farkındalık ve 
+    eğitim teknolojileri üzerine uluslararası çalışmalar yürüten öğretim üyesiyim.
+    """)
+    st.info("✉️ İletişim: bulentdos@yahoo.com")
+    
+    st.markdown("### 🎯 Uzmanlık Alanları")
+    st.success("✅ Eğitim Programları ve Öğretim")
+    st.success("✅ Dijital Okuryazarlık ve AI")
+    st.success("✅ Ölçme ve Değerlendirme")
 
-# 5. YAYINLAR (KESİN ÇALIŞAN DOI VE DERGİ LİNKLERİ)
-st.markdown("<h2 class='section-title'>📚 Bilimsel Yayınlar</h2>", unsafe_allow_html=True)
+# 5. MAKALELER (DOĞRUDAN ÇALIŞAN LİNKLER)
+st.markdown("---")
+st.markdown("<h2 style='color:#333;'>📚 Seçilmiş Yayınlar</h2>", unsafe_allow_html=True)
 
-# Doğrudan dergi ve makale kaynak linkleri
-makaleler = [
+# Linkleri doğrudan yayıncı sitelerinden (DergiPark vb.) verdim
+yayinlar = [
     {
-        "ad": "İlköğretim Öğrencilerinin Üstbilişsel Farkındalık Düzeyleri", 
-        "url": "https://dergipark.org.tr/tr/pub/mkusbe/issue/15396/161835",
-        "detay": "Mustafa Kemal Üniversitesi Sosyal Bilimler Dergisi, 2011"
-    },
-    {
-        "ad": "An Analysis of Teachers' Questioning Strategies", 
-        "url": "https://academicjournals.org/journal/ERR/article-abstract/5F8B84161601",
-        "detay": "Educational Research and Reviews, 2016"
-    },
-    {
-        "ad": "The Analysis of the Blogs Created in a Blended Course", 
-        "url": "https://pau.edu.tr/egetimdergi/tr/makale/the-analysis-of-the-blogs-created-in-a-blended-course-through-the-reflective-thinking-perspective-6",
-        "detay": "Educational Sciences: Theory and Practice, 2013"
-    },
-    {
-        "ad": "Mobile Phone Use, Metacognitive Awareness and Achievement", 
-        "url": "https://www.eurasiajournals.com/index.php/ejer/article/view/114",
-        "detay": "European Journal of Educational Research, 2014"
-    }
-]
-
-for m in makaleler:
-    st.markdown(f"""
-    <div class='pub-card'>
-        <a href='{m['url']}' target='_blank' class='pub-link'>📄 {m['ad']}</a><br>
-        <small style='color:#666; display:block; margin-top:5px;'>{m['detay']}</small>
-    </div>
-    """, unsafe_allow_html=True)
-
-# 6. ALT BİLGİ
-st.markdown("<br><hr><p style='text-align:center; color:gray;'>© 2025 | Prof. Dr. Bülent DÖŞ | GAÜN</p>", unsafe_allow_html=True)
+        "ad": "İlköğretim Öğrencilerinin Üstbilişsel Farkındalık Düzeyleri",
+        "url": "https://dergipark.
